@@ -1,0 +1,6 @@
+almavia_integration.list:
+  title: "Intégration"
+  description: "Build intégration page with ui_pattern strategy"
+  route_name: almavia_integration.list
+  parent: system.admin
+  weight: 10

@@ -1,0 +1,9 @@
+/* form icon toolbar */
+.toolbar-icon-almavia-integration-list:before {
+  background-image: url('./almavia-icon.png');
+}
+.toolbar-icon-almavia-integration-list:active:before,
+.toolbar-icon-almavia-integration-list.is-active:before,
+.toolbar-icon-almavia-integration-list:hover:before{
+  background-image: url('./almavia-icon-active.png');
+}

@@ -1,0 +1,16 @@
+almavia_integration.list:
+  path: '/almavia-cx/integration'
+  defaults:
+    _controller: '\Drupal\almavia_integration\Controller\IntegrationController::list'
+    _title: "Pages d'intégration"
+  requirements:
+    _permission: 'administer site configuration'
+
+almavia_integration.page:
+  path: '/almavia-cx/integration/{id}'
+  defaults:
+    _controller: '\Drupal\almavia_integration\Controller\IntegrationController::page'
+  options:
+    no_cache: TRUE
+  requirements:
+    _access: 'TRUE'

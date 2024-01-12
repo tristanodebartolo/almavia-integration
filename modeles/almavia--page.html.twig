@@ -1,0 +1,6 @@
+{# Variable #}
+{% set title = page.title ? page.title : null %}
+{# Title #}
+{% if title %}
+  <h2>{{ title|t }}</h2>
+{% endif %}

@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function almavia_integration_preprocess_page(&$variables) {
+  if (\Drupal::currentUser()->hasPermission('access toolbar')) {
+    $variables['#attached']['library'][] = 'almavia_integration/almavia-icon';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function almavia_integration_theme($existing, $type, $theme, $path) {
+
+  // get module path
+  $module_handler = \Drupal::service('module_handler');
+  $module_path = $module_handler->getModule('almavia_integration')->getPath();
+
+  // get each file in folder data
+  $fileSystem = \Drupal::service('file_system');
+  $templates = $fileSystem->scanDirectory($module_path. '/data', '/json$/');
+
+  $all_templates = [];
+
+  if (is_array($templates) && count($templates) > 0) {
+    foreach ($templates as $template) {
+      $template_name = $template->name;
+      $template_name_formated = str_replace('-', "_", $template_name);
+      $all_templates['almavia__integration__' . $template_name_formated] = [
+        'variables' => [
+          'page' => NULL,
+        ],
+      ];
+    }
+  }
+
+  return $all_templates;
+}

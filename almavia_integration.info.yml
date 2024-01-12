@@ -1,0 +1,5 @@
+name: Almavia integration
+type: module
+description: 'All page intégration site'
+core_version_requirement: ^10
+package: 'almavia'

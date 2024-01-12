@@ -1,0 +1,5 @@
+services:
+  almavia_integration.create:
+    class: \Drupal\almavia_integration\Commands\CreatePageIntegrationCommands
+    tags:
+      - { name: drush.command }
