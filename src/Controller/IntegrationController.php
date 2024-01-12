@@ -3,7 +3,9 @@
 namespace Drupal\almavia_integration\Controller;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 
 /**
@@ -22,21 +24,6 @@ class IntegrationController extends ControllerBase {
     $fileName = $module_path . '/data/' . $id . '.json';
     $data = file_get_contents($fileName);
     $data = Json::decode($data);
-
-    $fileSystem = \Drupal::service('file_system');
-    $templates = $fileSystem->scanDirectory($module_path. '/data', '/json$/');
-
-    if (is_array($templates) && count($templates) > 0) {
-      foreach ($templates as $template) {
-        $template_name = $template->name;
-        $template_name_formated = str_replace('-', "_", $template_name);
-        $all_templates['almavia__integration__' . $template_name_formated] = [
-          'variables' => [
-            'data' => [],
-          ],
-        ];
-      }
-    }
 
     return [
       '#theme' => 'almavia__integration__' . $data['template'],
@@ -97,6 +84,30 @@ class IntegrationController extends ControllerBase {
         'li' => $li_link
       ]
     ];
+
+  }
+
+  /**
+   * @param \Drupal\Core\Session\AccountInterface $user
+   * @param $id
+   *
+   * @return \Drupal\Core\Access\AccessResult
+   */
+  public function access(AccountInterface $user, $id):AccessResult {
+
+    $cache_builder = ['user:'.$user->id()];
+
+    $module_handler = \Drupal::service('module_handler');
+    $module_path = $module_handler->getModule('almavia_integration')->getPath();
+
+    // File page
+    $fileName = $module_path . '/data/' . $id . '.json';
+
+    if (($data = @file_get_contents($fileName)) === false) {
+      return AccessResult::forbidden()->addCacheableDependency($cache_builder)->cachePerUser();
+    }else {
+      return AccessResult::allowed()->addCacheableDependency($cache_builder)->cachePerUser();
+    }
 
   }
 

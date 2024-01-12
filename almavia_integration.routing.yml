@@ -13,4 +13,4 @@ almavia_integration.page:
   options:
     no_cache: TRUE
   requirements:
-    _access: 'TRUE'
+    _custom_access: '\Drupal\almavia_integration\Controller\IntegrationController::access'
