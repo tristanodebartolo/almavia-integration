@@ -38,10 +38,6 @@ class IntegrationController extends ControllerBase {
       }
     }
 
-    ksm($all_templates);
-    ksm($data);
-    ksm($data);
-
     return [
       '#theme' => 'almavia__integration__' . $data['template'],
       '#page' => $data,
