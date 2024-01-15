@@ -28,6 +28,7 @@ class IntegrationController extends ControllerBase {
     return [
       '#theme' => 'almavia__integration__' . $data['template'],
       '#page' => $data,
+      '#path' => $module_path,
     ];
 
   }
@@ -86,6 +87,7 @@ class IntegrationController extends ControllerBase {
     ];
 
   }
+
 
   /**
    * @param \Drupal\Core\Session\AccountInterface $user
