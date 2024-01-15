@@ -1,6 +1,48 @@
 {# Variable #}
-{% set title = page.title ? page.title : null %}
-{# Title #}
-{% if title %}
-  <h2>{{ title|t }}</h2>
-{% endif %}
+{% set data = page.data ? page.data : null %}
+{% set title = data and data.title ? data.title : null %}
+{% set subtitle = data and data.subtitle ? data.subtitle : null %}
+{% set chapo = data and data.chapo ? data.chapo : null %}
+{% set body = data and data.body ? data.body : null %}
+{% set link = data and data.link ? data.link : null %}
+{% set illustration = data and data.illustration ? data.illustration : null %}
+{# Html #}
+<div class="fr-container">
+  <div
+    class="fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-grid-row--center">
+    <div class="fr-py-0 fr-col-12 fr-col-md-6">
+      {# Title #}
+      {% if title %}
+        <h1>{{ title }}</h1>
+      {% endif %}
+      {# Title #}
+      {% if subtitle %}
+        <p class="fr-text--xs">{{ subtitle }}</p>
+      {% endif %}
+      {# chapo #}
+      {% if chapo %}
+        <p class="fr-text--lg">{{ chapo }}</p>
+      {% endif %}
+      {# body #}
+      {% if body %}
+        {{ body }}
+      {% endif %}
+      {# link #}
+      {% if link and link.uri and link.title %}
+        <ul class="fr-btns-group fr-btns-group--inline-md fr-py-5w">
+          <li>
+            <a class="fr-btn" href="{{ url(link.uri) }}">{{ link.title }}</a>
+          </li>
+        </ul>
+      {% endif %}
+    </div>
+    {# illustration #}
+    {% if module_path and illustration %}
+      <div class="fr-col-12 fr-col-md-3 fr-col-offset-md-1 fr-px-6w fr-px-md-0 fr-py-0">
+        <img src="/{{ module_path }}/assets/{{ illustration }}" alt="" width="306" height="306">
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
