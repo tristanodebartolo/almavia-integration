@@ -15,19 +15,19 @@
       {% if title %}
         <h1>{{ title }}</h1>
       {% endif %}
-      {# Title #}
+      {# Subtitle #}
       {% if subtitle %}
         <p class="fr-text--xs">{{ subtitle }}</p>
       {% endif %}
-      {# chapo #}
+      {# Chapo #}
       {% if chapo %}
         <p class="fr-text--lg">{{ chapo }}</p>
       {% endif %}
-      {# body #}
+      {# Body #}
       {% if body %}
         {{ body }}
       {% endif %}
-      {# link #}
+      {# Link #}
       {% if link and link.uri and link.title %}
         <ul class="fr-btns-group fr-btns-group--inline-md fr-py-5w">
           <li>
@@ -36,7 +36,7 @@
         </ul>
       {% endif %}
     </div>
-    {# illustration #}
+    {# Illustration #}
     {% if module_path and illustration %}
       <div class="fr-col-12 fr-col-md-3 fr-col-offset-md-1 fr-px-6w fr-px-md-0 fr-py-0">
         <img src="/{{ module_path }}/assets/{{ illustration }}" alt="" width="306" height="306">
