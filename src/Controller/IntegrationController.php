@@ -28,7 +28,7 @@ class IntegrationController extends ControllerBase {
     return [
       '#theme' => 'almavia__integration__' . $data['template'],
       '#page' => $data,
-      '#path' => $module_path,
+      '#module_path' => $module_path,
     ];
 
   }
